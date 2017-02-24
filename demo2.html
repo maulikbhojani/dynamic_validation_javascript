@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Validator">
+    <meta name="author" content="Maulik Bhojani">
+
+    <title>Validator</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="demo1.html">Demo1</a></li>
+                <li class="active"><a href="demo2.html">Demo2</a></li>
+                <li><a href="demo3.html">Demo3</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Demo1</h1>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN VALIDATION STATES-->
+                    <div class="portlet light portlet-fit portlet-form bordered">
+                        <div class="portlet-body">
+                            <!-- BEGIN FORM-->
+                            <form action="#" id="form_sample_1" class="form-horizontal" novalidate="novalidate">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Name
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" name="name" data-required="1" class="form-control"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Email
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input name="email" type="text" class="form-control"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">URL
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input name="url" type="text" class="form-control">
+                                            <span class="help-block"> e.g: http://www.demo.com or http://demo.com </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Number
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input name="number" type="text" class="form-control"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Digits
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input name="digits" type="text" class="form-control"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Credit Card
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input name="creditcard" type="text" class="form-control">
+                                            <span class="help-block"> e.g: 5500 0000 0000 0004 </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Occupation&nbsp;&nbsp;</label>
+                                        <div class="col-md-4">
+                                            <input name="occupation" type="text" class="form-control">
+                                            <span class="help-block"> optional field </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Select
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" name="select">
+                                                <option value="">Select...</option>
+                                                <option value="Category 1">Category 1</option>
+                                                <option value="Category 2">Category 2</option>
+                                                <option value="Category 3">Category 5</option>
+                                                <option value="Category 4">Category 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Multi Select
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" name="select_multi" multiple="">
+                                                <option value="Category 1">Category 1</option>
+                                                <option value="Category 2">Category 2</option>
+                                                <option value="Category 3">Category 3</option>
+                                                <option value="Category 4">Category 4</option>
+                                                <option value="Category 5">Category 5</option>
+                                            </select>
+                                            <span class="help-block"> select max 3 options, min 1 option </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Input Group
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-envelope"></i>
+                                                        </span>
+                                                <input type="text" class="form-control" name="input_group" placeholder="Email Address"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn green">Submit</button>
+                                            <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- END VALIDATION STATES-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
