@@ -13,22 +13,35 @@
             if(!d){ return false; }else{ return true; }
         },
 
+        emailValidation: function(e) {
+            var d = $(e).val().trim();
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(d);
+        },
+
         submit: function (data) {
             mbvalidator.resetError($.fn.mbvalidator.defaults.errorClass);
-            var resultSet = [];
-            $.each(data.data.fe.fe_req, function(k, e) {
-                if(!mbvalidator.required(e)){
-                    resultSet.push(e);
+            var resultSet = {};
+            $.each(data.data.fe, function(k, e) {
+                if(e.type == 'required'){
+                    if(!mbvalidator.required(e.eobj)){
+                        resultSet[e.name] = {'el': e.eobj, 'msg':'This is required field.'};
+                    }
+                }else if(e.type == 'email'){
+                    if(!mbvalidator.emailValidation(e.eobj)){
+                        //console.log("result: "+mbvalidator.checkErrorSet(resultSet, e.name));
+                        if (typeof resultSet[e.name] === 'undefined') {
+                            resultSet[e.name] = {'el': e.eobj, 'msg':'This is email field.'};
+                        }
+                    }
                 }
             });
 
             $.each(resultSet, function(k, e) {
-                mbvalidator.setError(e, 'This is required field.')
+                mbvalidator.setError(e.el, e.msg)
             });
 
-            if(resultSet.length > 0){
-                return false;
-            }
+            return $.isEmptyObject(resultSet);
         },
 
         setError: function(e, message) {
@@ -40,6 +53,18 @@
             }
 
         },
+
+        /*
+        checkErrorSet: function (resultSet, el) {
+            console.log(resultSet);
+            console.log(el);
+            $.each(resultSet, function(k, v) {
+                console.log(v.name);
+                if(v.name == el){
+                    return true;
+                }
+            });
+        }, */
 
         resetError:  function(c_name){
             $('.'+c_name).remove();
@@ -63,25 +88,37 @@
 
     // Public function
     $.fn.mbvalidator = function(rules, options) {
-        var f           = $(this);
-        var fe_req      = [];
-        var fe_email    = [];
-
+        var f   = $(this);
+        var fe  = [];
         mbvalidator.setDefaults(options);
 
         if(rules.required.length > 0){
-            $.each( rules.required, function(k, rule) {
-                if(f.find('[name="'+rule+'"]').length > 0){
-                    fe_req.push(f.find('[name="'+rule+'"]'));
+            $.each( rules.required, function(k, name) {
+                if(f.find('[name="'+name+'"]').length > 0){
+                    fe.push({
+                        'name':name,
+                        'eobj':f.find('[name="' + name + '"]'),
+                        'type':'required',
+
+                    });
+                }
+            });
+
+            $.each( rules.email, function(k, name) {
+                if(f.find('[name="'+name+'"]').length > 0){
+                    fe.push({
+                        'name':name,
+                        'eobj':f.find('[name="' + name + '"]'),
+                        'type':'email',
+
+                    });
                 }
             });
         }
 
         $(this).unbind('submit').bind("submit", {
             f: f,
-            fe:{
-                fe_req: fe_req,
-            },
+            fe:fe,
         }, mbvalidator.submit );
 
     };
