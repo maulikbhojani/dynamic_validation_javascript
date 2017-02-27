@@ -15,8 +15,13 @@
 
         emailValidation: function(e) {
             var d = $(e).val().trim();
+            if(!d){ return true; }
             var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             return regex.test(d);
+        },
+
+        numberValidation: function (e) { //Nuber value
+            return $.isNumeric(e);
         },
 
         submit: function (data) {
@@ -116,7 +121,7 @@
             });
         }
 
-        $(this).unbind('submit').bind("submit", {
+        $(this).off('submit').on("submit", {
             f: f,
             fe:fe,
         }, mbvalidator.submit );
