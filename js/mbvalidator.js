@@ -12,31 +12,46 @@
             var d = $(e).val().trim();
             if(!d){ return false; }else{ return true; }
         },
-
         emailValidation: function(e) {
             var d = $(e).val().trim();
             if(!d){ return true; }
             var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             return regex.test(d);
         },
-
-        numberValidation: function (e) { //Nuber value
-            return $.isNumeric(e);
+        numberValidation: function(e){
+            var d = $(e).val().trim();
+            if(!d){ return true; }
+            return !(/\D/g.test(d));
         },
-
+        decimalValidation: function (e) { //Decimal number
+            var d = $(e).val().trim();
+            if(!d){ return true; }
+            return $.isNumeric(d);
+        },
         submit: function (data) {
-            mbvalidator.resetError($.fn.mbvalidator.defaults.errorClass);
+            mbvalidator.resetError($.fn.mbvalidator.defaults.errorBinding+'.'+$.fn.mbvalidator.defaults.errorClass);
             var resultSet = {};
             $.each(data.data.fe, function(k, e) {
                 if(e.type == 'required'){
                     if(!mbvalidator.required(e.eobj)){
-                        resultSet[e.name] = {'el': e.eobj, 'msg':'This is required field.'};
+                        resultSet[e.name] = {'el': e.eobj, 'msg': $.fn.mbvalidator.defaults.requiredMsg };
                     }
                 }else if(e.type == 'email'){
                     if(!mbvalidator.emailValidation(e.eobj)){
-                        //console.log("result: "+mbvalidator.checkErrorSet(resultSet, e.name));
                         if (typeof resultSet[e.name] === 'undefined') {
-                            resultSet[e.name] = {'el': e.eobj, 'msg':'This is email field.'};
+                            resultSet[e.name] = {'el': e.eobj, 'msg':$.fn.mbvalidator.defaults.emailMsg };
+                        }
+                    }
+                }else if(e.type == 'number'){
+                    if(!mbvalidator.numberValidation(e.eobj)){
+                        if (typeof resultSet[e.name] === 'undefined') {
+                            resultSet[e.name] = {'el': e.eobj, 'msg':$.fn.mbvalidator.defaults.numberMsg };
+                        }
+                    }
+                }else if(e.type == 'decimal'){
+                    if(!mbvalidator.decimalValidation(e.eobj)){
+                        if (typeof resultSet[e.name] === 'undefined') {
+                            resultSet[e.name] = {'el': e.eobj, 'msg':$.fn.mbvalidator.defaults.decimalMsg };
                         }
                     }
                 }
@@ -48,7 +63,6 @@
 
             return $.isEmptyObject(resultSet);
         },
-
         setError: function(e, message) {
             if($.fn.mbvalidator.defaults.errorBinding){
                 var e_class = 'class = "'+$.fn.mbvalidator.defaults.errorClass+'"';
@@ -58,23 +72,9 @@
             }
 
         },
-
-        /*
-        checkErrorSet: function (resultSet, el) {
-            console.log(resultSet);
-            console.log(el);
-            $.each(resultSet, function(k, v) {
-                console.log(v.name);
-                if(v.name == el){
-                    return true;
-                }
-            });
-        }, */
-
         resetError:  function(c_name){
-            $('.'+c_name).remove();
+            $(c_name).remove();
         },
-
         setDefaults: function(options){
             $.each(options, function(k, v) {
                 if(k in $.fn.mbvalidator.defaults){
@@ -108,13 +108,32 @@
                     });
                 }
             });
-
             $.each( rules.email, function(k, name) {
                 if(f.find('[name="'+name+'"]').length > 0){
                     fe.push({
                         'name':name,
                         'eobj':f.find('[name="' + name + '"]'),
                         'type':'email',
+
+                    });
+                }
+            });
+            $.each( rules.number, function(k, name) {
+                if(f.find('[name="'+name+'"]').length > 0){
+                    fe.push({
+                        'name':name,
+                        'eobj':f.find('[name="' + name + '"]'),
+                        'type':'number',
+
+                    });
+                }
+            });
+            $.each( rules.decimal, function(k, name) {
+                if(f.find('[name="'+name+'"]').length > 0){
+                    fe.push({
+                        'name':name,
+                        'eobj':f.find('[name="' + name + '"]'),
+                        'type':'decimal',
 
                     });
                 }
@@ -131,6 +150,10 @@
     $.fn.mbvalidator.defaults = {
         errorBinding : 'div',
         errorClass   : 'error',
+        requiredMsg  : 'This field is required.',
+        emailMsg     : 'Please enter a valid email address.',
+        numberMsg    : 'A number is required.',
+        decimalMsg   : 'A decimal number is required.',
     };
 
     //$.fn.mbvalidator
