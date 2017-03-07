@@ -7,13 +7,13 @@ Simple validation
 
 Demo1 with 'required' validation
 --------------------------------
-
-$("#form_sample_1").mbvalidator({
-   required: ['name', 'email']
-}, {
-   errorBinding: 'p',
-   errorClass: 'myclass',
-});
+.. code-block:: javascript
+    $("#form_sample_1").mbvalidator({
+        required: ['name', 'email']
+    }, {
+        errorBinding: 'p',
+        errorClass: 'myclass',
+    });
 
 Just pass formId, rules for validations and options required.
 -------------------------------------------------------------
@@ -24,10 +24,11 @@ Just pass formId, rules for validations and options required.
         email: ['email'],
         number: ['name'],
         decimal: ['name'],
-    }, {
+    },{
         errorBinding: 'div',
-        errorClass: 'error',
- });
+        errorClass: 'error'
+    }
+ );
 
 
 
