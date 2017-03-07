@@ -37,7 +37,10 @@ Validation Options
 | Rule                  | Description                     |
 +=======================+=================================+
 | required              | For required validation         |
++-----------------------+---------------------------------+
 | email                 | For email address validation    |
++-----------------------+---------------------------------+
 | number                | For number value validation     |
++-----------------------+---------------------------------+
 | decimal               | For decimal number validation   |
 +-----------------------+---------------------------------+
