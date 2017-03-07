@@ -18,6 +18,7 @@ $("#form_sample_1").mbvalidator({
 Just pass formId, rules for validations and options required.
 -------------------------------------------------------------
 
+ .. code:: javascript
  $("#form_sample_1").mbvalidator({
         required: ['name'],
         email: ['email'],
@@ -26,7 +27,7 @@ Just pass formId, rules for validations and options required.
     }, {
         errorBinding: 'div',
         errorClass: 'error',
-});
+ });
 
 
 
