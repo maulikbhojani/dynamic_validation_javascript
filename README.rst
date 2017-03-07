@@ -8,12 +8,6 @@ Simple validation
 Demo1 with 'required' validation
 --------------------------------
 
-/**
-  * @class
-  * Comment block
-  *
-  * @param {string} name Unique name for the app
-  */
   $("#form_sample_1").mbvalidator({
       required: ['name', 'email']
     }, {
