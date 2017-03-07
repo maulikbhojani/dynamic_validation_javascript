@@ -7,7 +7,7 @@ Simple validation
 
 Demo1 with 'required' validation
 --------------------------------
-.. code-block:: javascript
+.. code:: javascript
     $("#form_sample_1").mbvalidator({
         required: ['name', 'email']
     }, {
