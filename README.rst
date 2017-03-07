@@ -8,12 +8,19 @@ Simple validation
 Demo1 with 'required' validation
 --------------------------------
 
-$("#form_sample_1").mbvalidator({
-    required: ['name', 'email']
-}, {
-    errorBinding: 'p',
-    errorClass: 'myclass',
-});
+/**
+  * @class
+  * Comment block
+  *
+  * @param {string} name Unique name for the app
+  */
+  $("#form_sample_1").mbvalidator({
+      required: ['name', 'email']
+    }, {
+      errorBinding: 'p',
+      errorClass: 'myclass',
+  });
+
 
 Just pass formId, rules for validations and options required.
 -------------------------------------------------------------
