@@ -34,24 +34,36 @@
             $.each(data.data.fe, function(k, e) {
                 if(e.type == 'required'){
                     if(!mbvalidator.required(e.eobj)){
-                        resultSet[e.name] = {'el': e.eobj, 'msg': $.fn.mbvalidator.defaults.requiredMsg };
+                        resultSet[e.name] = {
+                            'el': e.eobj,
+                            'msg': ($.fn.mbvalidator.message.MBrequired != null && typeof $.fn.mbvalidator.message.MBrequired[e.name] !== 'undefined') ? $.fn.mbvalidator.message.MBrequired[e.name] : $.fn.mbvalidator.defaults.requiredMsg
+                        };
                     }
                 }else if(e.type == 'email'){
                     if(!mbvalidator.emailValidation(e.eobj)){
                         if (typeof resultSet[e.name] === 'undefined') {
-                            resultSet[e.name] = {'el': e.eobj, 'msg':$.fn.mbvalidator.defaults.emailMsg };
+                            resultSet[e.name] = {
+                                'el': e.eobj,
+                                'msg': ($.fn.mbvalidator.message.MBemail != null && typeof $.fn.mbvalidator.message.MBemail[e.name] !== 'undefined') ? $.fn.mbvalidator.message.MBemail[e.name] : $.fn.mbvalidator.defaults.emailMsg
+                            };
                         }
                     }
                 }else if(e.type == 'number'){
                     if(!mbvalidator.numberValidation(e.eobj)){
                         if (typeof resultSet[e.name] === 'undefined') {
-                            resultSet[e.name] = {'el': e.eobj, 'msg':$.fn.mbvalidator.defaults.numberMsg };
+                            resultSet[e.name] = {
+                                'el': e.eobj,
+                                'msg': ($.fn.mbvalidator.message.MBnumber != null && typeof $.fn.mbvalidator.message.MBnumber[e.name] !== 'undefined') ? $.fn.mbvalidator.message.MBnumber[e.name] : $.fn.mbvalidator.defaults.numberMsg
+                            };
                         }
                     }
                 }else if(e.type == 'decimal'){
                     if(!mbvalidator.decimalValidation(e.eobj)){
                         if (typeof resultSet[e.name] === 'undefined') {
-                            resultSet[e.name] = {'el': e.eobj, 'msg':$.fn.mbvalidator.defaults.decimalMsg };
+                            resultSet[e.name] = {
+                                'el': e.eobj,
+                                'msg': ($.fn.mbvalidator.message.MBdecimal != null && typeof $.fn.mbvalidator.message.MBdecimal[e.name] !== 'undefined') ? $.fn.mbvalidator.message.MBdecimal[e.name] : $.fn.mbvalidator.defaults.decimalMsg
+                            };
                         }
                     }
                 }
@@ -89,13 +101,57 @@
                 }
             });
         },
+        setErrorMessage: function (messages) {
+            var required = {};
+            var email = {};
+            var number = {};
+            var decimal = {};
+            if(typeof(messages) != "undefined" && messages !== null){
+                if(typeof messages.required !== 'undefined'){
+                    $.each(messages.required, function(k, v) {
+                        required[k] = v;
+                        $.fn.mbvalidator.message.MBrequired = required;
+                    });
+                }
+                if(typeof messages.email !== 'undefined'){
+                    $.each(messages.email, function(k, v) {
+                        email[k] = v;
+                        $.fn.mbvalidator.message.MBemail = email;
+                    });
+                }
+                if(typeof messages.number !== 'undefined'){
+                    $.each(messages.number, function(k, v) {
+                        number[k] = v;
+                        $.fn.mbvalidator.message.MBnumber = number;
+                    });
+                }
+                if(typeof messages.decimal !== 'undefined'){
+                    $.each(messages.decimal, function(k, v) {
+                        decimal[k] = v;
+                        $.fn.mbvalidator.message.MBdecimal = decimal;
+                    });
+                }
+            }
+
+            console.log($.fn.mbvalidator.message);
+        },
     };
 
     // Public function
-    $.fn.mbvalidator = function(rules, options) {
+    $.fn.mbvalidator = function(rules, options, messages) {
         var f   = $(this);
         var fe  = [];
+
         mbvalidator.setDefaults(options);
+        mbvalidator.setErrorMessage(messages);
+
+        /*
+        if (typeof messages.required.email !== 'undefined') {
+            console.log(messages.required.name);
+        }else{
+            console.log('No');
+        }
+        */
 
         if(rules.required.length > 0){
             $.each( rules.required, function(k, name) {
@@ -155,6 +211,8 @@
         numberMsg    : 'A number is required.',
         decimalMsg   : 'A decimal number is required.',
     };
+
+    $.fn.mbvalidator.message = {};
 
     //$.fn.mbvalidator
     //$.mbvalidator.init();

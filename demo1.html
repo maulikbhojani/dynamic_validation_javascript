@@ -95,12 +95,26 @@
 <script>
 
     $("#form_sample_1").mbvalidator({
-            required: ['name'],
+            required: ['name', 'email'],
             email: ['email'],
             number: ['name'],
+            decimal: ['email'],
         }, {
             errorBinding: 'div',
             errorClass: 'error',
+        }, {
+            required: {
+                'name': 'Custom required message for Name.',
+            },
+            email: {
+                'email': 'Custom email message for Email.'
+            },
+            number: {
+                'name': 'Custom number message for Number.',
+            },
+            decimal: {
+                'email' : 'Custom decimal message for Email.',
+            },
         });
 </script>
 
