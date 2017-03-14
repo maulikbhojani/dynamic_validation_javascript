@@ -133,7 +133,7 @@
                 }
             }
 
-            console.log($.fn.mbvalidator.message);
+            //console.log($.fn.mbvalidator.message);
         },
     };
 
@@ -153,48 +153,48 @@
         }
         */
 
-        if(rules.required.length > 0){
-            $.each( rules.required, function(k, name) {
-                if(f.find('[name="'+name+'"]').length > 0){
-                    fe.push({
-                        'name':name,
-                        'eobj':f.find('[name="' + name + '"]'),
-                        'type':'required',
 
-                    });
-                }
-            });
-            $.each( rules.email, function(k, name) {
-                if(f.find('[name="'+name+'"]').length > 0){
-                    fe.push({
-                        'name':name,
-                        'eobj':f.find('[name="' + name + '"]'),
-                        'type':'email',
+        $.each( rules.required, function(k, name) {
+            if(f.find('[name="'+name+'"]').length > 0){
+                fe.push({
+                    'name':name,
+                    'eobj':f.find('[name="' + name + '"]'),
+                    'type':'required',
 
-                    });
-                }
-            });
-            $.each( rules.number, function(k, name) {
-                if(f.find('[name="'+name+'"]').length > 0){
-                    fe.push({
-                        'name':name,
-                        'eobj':f.find('[name="' + name + '"]'),
-                        'type':'number',
+                });
+            }
+        });
+        $.each( rules.email, function(k, name) {
+            if(f.find('[name="'+name+'"]').length > 0){
+                fe.push({
+                    'name':name,
+                    'eobj':f.find('[name="' + name + '"]'),
+                    'type':'email',
 
-                    });
-                }
-            });
-            $.each( rules.decimal, function(k, name) {
-                if(f.find('[name="'+name+'"]').length > 0){
-                    fe.push({
-                        'name':name,
-                        'eobj':f.find('[name="' + name + '"]'),
-                        'type':'decimal',
+                });
+            }
+        });
+        $.each( rules.number, function(k, name) {
+            if(f.find('[name="'+name+'"]').length > 0){
+                fe.push({
+                    'name':name,
+                    'eobj':f.find('[name="' + name + '"]'),
+                    'type':'number',
 
-                    });
-                }
-            });
-        }
+                });
+            }
+        });
+        $.each( rules.decimal, function(k, name) {
+            if(f.find('[name="'+name+'"]').length > 0){
+                fe.push({
+                    'name':name,
+                    'eobj':f.find('[name="' + name + '"]'),
+                    'type':'decimal',
+
+                });
+            }
+        });
+
 
         $(this).off('submit').on("submit", {
             f: f,
@@ -203,6 +203,7 @@
 
     };
 
+    
     $.fn.mbvalidator.defaults = {
         errorBinding : 'div',
         errorClass   : 'error',
